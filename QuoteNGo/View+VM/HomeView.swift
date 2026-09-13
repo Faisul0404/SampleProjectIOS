@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel: AuthViewModel
+    @ObservedObject var viewModel: LoginVM
 
     var body: some View {
         NavigationStack {
@@ -27,5 +27,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(viewModel: AuthViewModel())
+    HomeView(viewModel: LoginVM())
 }

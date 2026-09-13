@@ -11,8 +11,9 @@ import XCTest
 @MainActor
 final class QuoteNGoTests: XCTestCase {
     func testLoginSuccessAuthenticatesUser() async {
-        let service = MockAuthService(result: .success(LoginResponse(token: "test-token")))
-        let viewModel = AuthViewModel(authService: service)
+        var savedUser: User?
+        let api = MockLoginAPI(result: .success(AuthLoginResponse(payload: makeUser(accessToken: "test-token"))))
+        let viewModel = AuthViewModel(loginAPI: api.call, onSignIn: { savedUser = $0 })
         viewModel.userInputText = "person@example.com"
         viewModel.password = "password"
 
@@ -20,26 +21,29 @@ final class QuoteNGoTests: XCTestCase {
 
         XCTAssertTrue(viewModel.isAuthenticated)
         XCTAssertEqual(viewModel.accessToken, "test-token")
-        XCTAssertEqual(service.loginCallCount, 1)
+        XCTAssertEqual(api.callCount, 1)
+        XCTAssertEqual(api.email, "person@example.com")
+        XCTAssertEqual(api.password, "password")
+        XCTAssertEqual(savedUser?.accessToken, "test-token")
         XCTAssertTrue(viewModel.password.isEmpty)
     }
 
-    func testInvalidEmailOrPhoneDoesNotCallService() async {
-        let service = MockAuthService(result: .success(LoginResponse(token: "unused")))
-        let viewModel = AuthViewModel(authService: service)
+    func testInvalidEmailDoesNotCallAPI() async {
+        let api = MockLoginAPI(result: .success(AuthLoginResponse(payload: makeUser(accessToken: "unused"))))
+        let viewModel = AuthViewModel(loginAPI: api.call)
         viewModel.userInputText = "invalid-email"
         viewModel.password = "password"
 
         await viewModel.login()
 
-        XCTAssertEqual(viewModel.errorMessage, "Please enter a valid email or phone number.")
-        XCTAssertEqual(service.loginCallCount, 0)
+        XCTAssertEqual(viewModel.errorMessage, "Please enter a valid email address.")
+        XCTAssertEqual(api.callCount, 0)
         XCTAssertFalse(viewModel.isAuthenticated)
     }
 
     func testLoginFailureShowsMessage() async {
-        let service = MockAuthService(result: .failure(TestError.rejected))
-        let viewModel = AuthViewModel(authService: service)
+        let api = MockLoginAPI(result: .failure(TestError.rejected))
+        let viewModel = AuthViewModel(loginAPI: api.call)
         viewModel.userInputText = "person@example.com"
         viewModel.password = "wrong-password"
 
@@ -51,9 +55,9 @@ final class QuoteNGoTests: XCTestCase {
     }
 
     func testLogoutClearsSession() async {
-        let service = MockAuthService(result: .success(LoginResponse(token: "test-token")))
-        let viewModel = AuthViewModel(authService: service)
-        viewModel.userInputText = "0412345678"
+        let api = MockLoginAPI(result: .success(AuthLoginResponse(payload: makeUser(accessToken: "test-token"))))
+        let viewModel = AuthViewModel(loginAPI: api.call)
+        viewModel.userInputText = "person@example.com"
         viewModel.password = "password"
         await viewModel.login()
 
@@ -62,24 +66,11 @@ final class QuoteNGoTests: XCTestCase {
         XCTAssertFalse(viewModel.isAuthenticated)
         XCTAssertNil(viewModel.accessToken)
         XCTAssertTrue(viewModel.userInputText.isEmpty)
-        XCTAssertTrue(viewModel.phoneNumber.isEmpty)
-    }
-
-    func testPhoneLoginBuildsPhoneCredentials() async {
-        let service = MockAuthService(result: .success(LoginResponse(token: "test-token")))
-        let viewModel = AuthViewModel(authService: service)
-        viewModel.userInputText = "0412345678"
-        viewModel.password = "password"
-
-        await viewModel.login()
-
-        XCTAssertEqual(service.credentials, LoginCredentials(email: nil, phone: "0412345678", password: "password"))
-        XCTAssertTrue(viewModel.isAuthenticated)
     }
 
     func testLoginRequestMatchesSwaggerContract() throws {
         let service = AuthService(deviceID: "device-123", devicePushToken: "push-token")
-        let credentials = LoginCredentials(email: "person@example.com", phone: nil, password: "a password")
+        let credentials = LoginCredentials(email: "person@example.com", password: "a password")
 
         let request = service.makeLoginRequest(credentials: credentials)
         let body = try XCTUnwrap(request.httpBody.flatMap { String(data: $0, encoding: .utf8) })
@@ -97,33 +88,58 @@ final class QuoteNGoTests: XCTestCase {
     }
 
     func testNotRegisteredStatusIsExposed() async {
-        let service = MockAuthService(
-            result: .failure(AuthServiceError.server(statusCode: 404, message: "Account not found."))
+        let api = MockLoginAPI(
+            result: .failure(ErrorResponse.error(404, nil, TestError.rejected))
         )
-        let viewModel = AuthViewModel(authService: service)
+        let viewModel = AuthViewModel(loginAPI: api.call)
         viewModel.userInputText = "person@example.com"
         viewModel.password = "password"
 
         await viewModel.login()
 
         XCTAssertTrue(viewModel.isSocialNotRegistered)
-        XCTAssertEqual(viewModel.errorMessage, "Account not found.")
+        XCTAssertEqual(viewModel.errorMessage, "Credentials were rejected.")
     }
 }
 
-@MainActor
-private final class MockAuthService: AuthServicing {
-    let result: Result<LoginResponse, Error>
-    private(set) var loginCallCount = 0
-    private(set) var credentials: LoginCredentials?
+private func makeUser(accessToken: String) -> User {
+    User(
+        _id: nil,
+        uuid: nil,
+        firstName: nil,
+        lastName: nil,
+        fullName: nil,
+        email: nil,
+        avatarUrl: nil,
+        timezone: nil,
+        countryCode: nil,
+        phone: nil,
+        emailVerifiedAt: nil,
+        phoneVerifiedAt: nil,
+        subscriptionLevel: nil,
+        storeName: nil,
+        isProfileCompleted: nil,
+        isPackageSelected: nil,
+        isPaymentMethods: nil,
+        accessToken: accessToken
+    )
+}
 
-    init(result: Result<LoginResponse, Error>) {
+@MainActor
+private final class MockLoginAPI {
+    let result: Result<AuthLoginResponse, Error>
+    private(set) var callCount = 0
+    private(set) var email: String?
+    private(set) var password: String?
+
+    init(result: Result<AuthLoginResponse, Error>) {
         self.result = result
     }
 
-    func login(credentials: LoginCredentials) async throws -> LoginResponse {
-        loginCallCount += 1
-        self.credentials = credentials
+    func call(deviceId: String, deviceType: String, devicePushToken: String, email: String, password: String, accept: String) async throws -> AuthLoginResponse {
+        callCount += 1
+        self.email = email
+        self.password = password
         return try result.get()
     }
 }

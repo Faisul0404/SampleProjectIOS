@@ -7,9 +7,9 @@
 import Foundation
 
 open class SwaggerClientAPI {
-    public static var basePath = APIConstants.baseURL
+    public static var basePath = APIConstants.baseURL.absoluteString
     public static var credential: URLCredential?
-    public static var customHeaders: [String:String] = AppConstant.getCustomHeaders()
+    public static var customHeaders: [String:String] = APIConstants.getCustomHeaders()
     public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
     public static var defaultTimeout: Double = 60.0
 }

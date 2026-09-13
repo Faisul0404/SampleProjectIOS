@@ -13,10 +13,11 @@ struct LoginView: View {
                         .padding(.bottom, 34)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Email or Phone Number")
+                        Text("Email")
                             .font(.headline)
-                        TextField("me@example.com or 0412345678", text: $viewModel.userInputText)
-                            .textContentType(.username)
+                        TextField("me@example.com", text: $vm.userInputText)
+                            .textContentType(.emailAddress)
+                            .keyboardType(.emailAddress)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                             .authFieldStyle()
@@ -27,28 +28,28 @@ struct LoginView: View {
                             .font(.headline)
                         HStack {
                             Group {
-                                if viewModel.showPassword {
-                                    TextField("Password", text: $viewModel.password)
+                                if vm.showPassword {
+                                    TextField("Password", text: $vm.password)
                                 } else {
-                                    SecureField("Password", text: $viewModel.password)
+                                    SecureField("Password", text: $vm.password)
                                 }
                             }
                             .textContentType(.password)
 
                             Button {
-                                viewModel.showPassword.toggle()
+                                vm.showPassword.toggle()
                             } label: {
-                                Image(systemName: viewModel.showPassword ? "eye.slash" : "eye")
+                                Image(systemName: vm.showPassword ? "eye.slash" : "eye")
                                     .foregroundStyle(.secondary)
                             }
-                            .accessibilityLabel(viewModel.showPassword ? "Hide password" : "Show password")
+                            .accessibilityLabel(vm.showPassword ? "Hide password" : "Show password")
                         }
                         .authFieldStyle()
                     }
                     .padding(.top, 16)
 
                     Button("Forgot Password?") {
-                        viewModel.isForgotPasswordViewActive = true
+                        vm.isForgotPasswordViewActive = true
                         informationMessage = "Connect this action to your forgot-password flow."
                     }
                     .fontWeight(.semibold)
@@ -56,10 +57,10 @@ struct LoginView: View {
                     .padding(.vertical, 20)
 
                     Button {
-                        Task { await viewModel.login() }
+                        Task { await vm.login() }
                     } label: {
                         Group {
-                            if viewModel.isLoading {
+                            if vm.isLoading {
                                 ProgressView().tint(.white)
                             } else {
                                 Text("Sign In").fontWeight(.semibold)
@@ -69,7 +70,7 @@ struct LoginView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.black)
-                    .disabled(viewModel.isLoading)
+                    .disabled(vm.isLoading)
 
                     Text("Or continue with")
                         .font(.subheadline)
@@ -88,7 +89,7 @@ struct LoginView: View {
                     HStack(spacing: 4) {
                         Text("Don’t have an account?")
                         Button("Sign Up") {
-                            viewModel.isSignUpViewActive = true
+                            vm.isSignUpViewActive = true
                             informationMessage = "Connect this action to your sign-up flow."
                         }
                         .fontWeight(.semibold)
@@ -101,12 +102,12 @@ struct LoginView: View {
             }
             .navigationTitle("Sign In")
             .navigationBarTitleDisplayMode(.inline)
-            .disabled(viewModel.isLoading)
+            .disabled(vm.isLoading)
         }
-        .alert(viewModel.alertTitle, isPresented: errorAlertBinding) {
-            Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+        .alert(vm.alertTitle, isPresented: errorAlertBinding) {
+            Button("OK", role: .cancel) { vm.errorMessage = nil }
         } message: {
-            Text(viewModel.errorMessage ?? "Please try again.")
+            Text(vm.errorMessage ?? "Please try again.")
         }
         .alert("Coming Soon", isPresented: informationAlertBinding) {
             Button("OK", role: .cancel) { informationMessage = nil }
@@ -140,8 +141,8 @@ struct LoginView: View {
 
     private var errorAlertBinding: Binding<Bool> {
         Binding(
-            get: { viewModel.errorMessage != nil },
-            set: { if !$0 { viewModel.errorMessage = nil } }
+            get: { vm.errorMessage != nil },
+            set: { if !$0 { vm.errorMessage = nil } }
         )
     }
 
@@ -167,5 +168,5 @@ private extension View {
 }
 
 #Preview {
-    LoginView(viewModel: AuthViewModel())
+    LoginView(vm: LoginVM())
 }

@@ -3,7 +3,6 @@ import UIKit
 
 struct LoginCredentials: Equatable {
     let email: String?
-    let phone: String?
     let password: String
 }
 
@@ -118,9 +117,6 @@ struct AuthService: AuthServicing {
         ]
         if let email = credentials.email {
             formFields.append(URLQueryItem(name: "email", value: email))
-        }
-        if let phone = credentials.phone {
-            formFields.append(URLQueryItem(name: "phone", value: phone))
         }
         if let devicePushToken {
             formFields.append(URLQueryItem(name: "device_push_token", value: devicePushToken))

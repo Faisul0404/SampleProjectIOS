@@ -7,6 +7,9 @@ public class APIConstants {
     //MARK: RESTful API key
     public static var apiKey = "6a9a92ef1d669fd66859f1f3a8faad1f"
 
+    //MARK: Auth endpoints
+    public static var loginPath = "login"
+
     //MARK: Custom headers
     public static var customHeaders: [String: String] = [:]
     

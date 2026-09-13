@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		416B3FF8470C7774B5D57B2A /* Pods_QuoteNGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D38E9FBAAEC39228608AAF5 /* Pods_QuoteNGoTests.framework */; };
+		DFB75DC2370AE0F5CEEB15E3 /* Pods_QuoteNGo_QuoteNGoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E97CAAD944914641DCF0A23 /* Pods_QuoteNGo_QuoteNGoUITests.framework */; };
+		FB09B6F99E0C9DD64CFB16D5 /* Pods_QuoteNGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A100C2426B936CAA86B1D385 /* Pods_QuoteNGo.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8BEEF21630552C1A008FACF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +30,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04AB508DD6C6616BAA197CBD /* Pods-QuoteNGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGoTests.debug.xcconfig"; path = "Target Support Files/Pods-QuoteNGoTests/Pods-QuoteNGoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E97CAAD944914641DCF0A23 /* Pods_QuoteNGo_QuoteNGoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuoteNGo_QuoteNGoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DD9A3526C2D92A17914D6C5 /* Pods-QuoteNGo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGo.debug.xcconfig"; path = "Target Support Files/Pods-QuoteNGo/Pods-QuoteNGo.debug.xcconfig"; sourceTree = "<group>"; };
 		8BEEF20330552C18008FACF8 /* QuoteNGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuoteNGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BEEF21530552C1A008FACF8 /* QuoteNGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuoteNGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BEEF21F30552C1A008FACF8 /* QuoteNGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuoteNGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		947F2646A564A4B53060B6D8 /* Pods-QuoteNGo-QuoteNGoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGo-QuoteNGoUITests.debug.xcconfig"; path = "Target Support Files/Pods-QuoteNGo-QuoteNGoUITests/Pods-QuoteNGo-QuoteNGoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9D38E9FBAAEC39228608AAF5 /* Pods_QuoteNGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuoteNGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A100C2426B936CAA86B1D385 /* Pods_QuoteNGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuoteNGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5300F128B2A66D62EDA0FB0 /* Pods-QuoteNGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGo.release.xcconfig"; path = "Target Support Files/Pods-QuoteNGo/Pods-QuoteNGo.release.xcconfig"; sourceTree = "<group>"; };
+		C478294DD08537D834B3DFA3 /* Pods-QuoteNGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGoTests.release.xcconfig"; path = "Target Support Files/Pods-QuoteNGoTests/Pods-QuoteNGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		CE288376BD8ACFB74EDF3192 /* Pods-QuoteNGo-QuoteNGoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuoteNGo-QuoteNGoUITests.release.xcconfig"; path = "Target Support Files/Pods-QuoteNGo-QuoteNGoUITests/Pods-QuoteNGo-QuoteNGoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB09B6F99E0C9DD64CFB16D5 /* Pods_QuoteNGo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416B3FF8470C7774B5D57B2A /* Pods_QuoteNGoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +83,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFB75DC2370AE0F5CEEB15E3 /* Pods_QuoteNGo_QuoteNGoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0680A48A5D657CD1CE4A1235 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A100C2426B936CAA86B1D385 /* Pods_QuoteNGo.framework */,
+				3E97CAAD944914641DCF0A23 /* Pods_QuoteNGo_QuoteNGoUITests.framework */,
+				9D38E9FBAAEC39228608AAF5 /* Pods_QuoteNGoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8BEEF1FA30552C18008FACF8 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +107,8 @@
 				8BEEF21830552C1A008FACF8 /* QuoteNGoTests */,
 				8BEEF22230552C1A008FACF8 /* QuoteNGoUITests */,
 				8BEEF20430552C18008FACF8 /* Products */,
+				E1F889A86879795FE71EFD42 /* Pods */,
+				0680A48A5D657CD1CE4A1235 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +122,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E1F889A86879795FE71EFD42 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6DD9A3526C2D92A17914D6C5 /* Pods-QuoteNGo.debug.xcconfig */,
+				A5300F128B2A66D62EDA0FB0 /* Pods-QuoteNGo.release.xcconfig */,
+				947F2646A564A4B53060B6D8 /* Pods-QuoteNGo-QuoteNGoUITests.debug.xcconfig */,
+				CE288376BD8ACFB74EDF3192 /* Pods-QuoteNGo-QuoteNGoUITests.release.xcconfig */,
+				04AB508DD6C6616BAA197CBD /* Pods-QuoteNGoTests.debug.xcconfig */,
+				C478294DD08537D834B3DFA3 /* Pods-QuoteNGoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BEEF22930552C1A008FACF8 /* Build configuration list for PBXNativeTarget "QuoteNGo" */;
 			buildPhases = (
+				3ECD7EC9535DB1B91DAB5767 /* [CP] Check Pods Manifest.lock */,
 				8BEEF1FF30552C18008FACF8 /* Sources */,
 				8BEEF20030552C18008FACF8 /* Frameworks */,
 				8BEEF20130552C18008FACF8 /* Resources */,
+				AF2AEB532A25499D5E73C850 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -111,8 +156,6 @@
 				8BEEF20530552C18008FACF8 /* QuoteNGo */,
 			);
 			name = QuoteNGo;
-			packageProductDependencies = (
-			);
 			productName = QuoteNGo;
 			productReference = 8BEEF20330552C18008FACF8 /* QuoteNGo.app */;
 			productType = "com.apple.product-type.application";
@@ -121,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BEEF22C30552C1A008FACF8 /* Build configuration list for PBXNativeTarget "QuoteNGoTests" */;
 			buildPhases = (
+				EDD1AADF72D1EE893A2D2239 /* [CP] Check Pods Manifest.lock */,
 				8BEEF21130552C1A008FACF8 /* Sources */,
 				8BEEF21230552C1A008FACF8 /* Frameworks */,
 				8BEEF21330552C1A008FACF8 /* Resources */,
@@ -134,8 +178,6 @@
 				8BEEF21830552C1A008FACF8 /* QuoteNGoTests */,
 			);
 			name = QuoteNGoTests;
-			packageProductDependencies = (
-			);
 			productName = QuoteNGoTests;
 			productReference = 8BEEF21530552C1A008FACF8 /* QuoteNGoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -144,9 +186,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BEEF22F30552C1A008FACF8 /* Build configuration list for PBXNativeTarget "QuoteNGoUITests" */;
 			buildPhases = (
+				C08CC2AEF7A5005BD282E10D /* [CP] Check Pods Manifest.lock */,
 				8BEEF21B30552C1A008FACF8 /* Sources */,
 				8BEEF21C30552C1A008FACF8 /* Frameworks */,
 				8BEEF21D30552C1A008FACF8 /* Resources */,
+				F4DF58AF9EE63B4A6B7AA74F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,8 +201,6 @@
 				8BEEF22230552C1A008FACF8 /* QuoteNGoUITests */,
 			);
 			name = QuoteNGoUITests;
-			packageProductDependencies = (
-			);
 			productName = QuoteNGoUITests;
 			productReference = 8BEEF21F30552C1A008FACF8 /* QuoteNGoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -230,6 +272,117 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3ECD7EC9535DB1B91DAB5767 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuoteNGo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF2AEB532A25499D5E73C850 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo/Pods-QuoteNGo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo/Pods-QuoteNGo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo/Pods-QuoteNGo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C08CC2AEF7A5005BD282E10D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuoteNGo-QuoteNGoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDD1AADF72D1EE893A2D2239 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuoteNGoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4DF58AF9EE63B4A6B7AA74F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo-QuoteNGoUITests/Pods-QuoteNGo-QuoteNGoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo-QuoteNGoUITests/Pods-QuoteNGo-QuoteNGoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QuoteNGo-QuoteNGoUITests/Pods-QuoteNGo-QuoteNGoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8BEEF1FF30552C18008FACF8 /* Sources */ = {
@@ -307,7 +460,7 @@
 				DEVELOPMENT_TEAM = XGXUM33NF8;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -369,7 +522,7 @@
 				DEVELOPMENT_TEAM = XGXUM33NF8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -387,6 +540,7 @@
 		};
 		8BEEF22A30552C1A008FACF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DD9A3526C2D92A17914D6C5 /* Pods-QuoteNGo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -410,7 +564,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
@@ -434,6 +591,7 @@
 		};
 		8BEEF22B30552C1A008FACF8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5300F128B2A66D62EDA0FB0 /* Pods-QuoteNGo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -457,7 +615,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
@@ -481,6 +642,7 @@
 		};
 		8BEEF22D30552C1A008FACF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04AB508DD6C6616BAA197CBD /* Pods-QuoteNGoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -507,6 +669,7 @@
 		};
 		8BEEF22E30552C1A008FACF8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C478294DD08537D834B3DFA3 /* Pods-QuoteNGoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -533,6 +696,7 @@
 		};
 		8BEEF23030552C1A008FACF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 947F2646A564A4B53060B6D8 /* Pods-QuoteNGo-QuoteNGoUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -558,6 +722,7 @@
 		};
 		8BEEF23130552C1A008FACF8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE288376BD8ACFB74EDF3192 /* Pods-QuoteNGo-QuoteNGoUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

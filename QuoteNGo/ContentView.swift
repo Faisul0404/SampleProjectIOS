@@ -9,13 +9,13 @@ import SwiftUI
 
 @MainActor
 struct ContentView: View {
-    @StateObject private var viewModel: AuthViewModel
+    @StateObject private var viewModel: LoginVM
 
     init() {
-        _viewModel = StateObject(wrappedValue: AuthViewModel())
+        _viewModel = StateObject(wrappedValue: LoginVM())
     }
 
-    init(viewModel: AuthViewModel) {
+    init(viewModel: LoginVM) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -24,7 +24,7 @@ struct ContentView: View {
             if viewModel.isAuthenticated {
                 HomeView(viewModel: viewModel)
             } else {
-                LoginView(viewModel: viewModel)
+                LoginView(vm: viewModel)
             }
         }
         .animation(.easeInOut, value: viewModel.isAuthenticated)
