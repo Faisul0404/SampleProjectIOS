@@ -38,8 +38,6 @@ class ApplicationServiceProvider {
         
         self.setInitialAuthParameters()
         
-        self.setupNetworkingEnvironmentForAuthentications()
-        
         //MARK: App logger
         self.configureLogger()
         
@@ -56,14 +54,6 @@ class ApplicationServiceProvider {
         ]
         
         initialAuthParameters.updateDictionary(otherValues: dict)
-    }
-    
-    
-    //MARK: Setup networking environment
-    private func setupNetworkingEnvironmentForAuthentications() {
-        AppConstant.baseURL = API.baseURL.absoluteString
-        AppConstant.RESTfulAPIKey = API.key
-        AppConstant.googleAPIKey = Google.key
     }
     
     

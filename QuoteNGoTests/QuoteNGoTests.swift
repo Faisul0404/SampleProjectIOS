@@ -100,6 +100,36 @@ final class QuoteNGoTests: XCTestCase {
         XCTAssertTrue(viewModel.isSocialNotRegistered)
         XCTAssertEqual(viewModel.errorMessage, "Credentials were rejected.")
     }
+
+    func testNoInternetConnectionThrowsAppError() async {
+        let api = MockLoginAPI(result: .success(AuthLoginResponse(payload: makeUser(accessToken: "unused"))))
+        let viewModel = AuthViewModel(
+            loginAPI: api.call,
+            networkCheck: {
+                throw AppError.message("No internet connection. Please check your network settings.")
+            }
+        )
+        viewModel.userInputText = "person@example.com"
+        viewModel.password = "password"
+
+        await viewModel.login()
+
+        XCTAssertEqual(viewModel.errorMessage, "No internet connection. Please check your network settings.")
+        XCTAssertEqual(api.callCount, 0)
+        XCTAssertFalse(viewModel.isAuthenticated)
+    }
+
+    func testNilPayloadThrowsDataNotFound() async {
+        let api = MockLoginAPI(result: .success(AuthLoginResponse(payload: nil)))
+        let viewModel = AuthViewModel(loginAPI: api.call)
+        viewModel.userInputText = "person@example.com"
+        viewModel.password = "password"
+
+        await viewModel.login()
+
+        XCTAssertEqual(viewModel.errorMessage, "data not found")
+        XCTAssertFalse(viewModel.isAuthenticated)
+    }
 }
 
 private func makeUser(accessToken: String) -> User {

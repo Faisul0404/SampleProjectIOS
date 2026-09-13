@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import UIKit
+import Alamofire
 
 @MainActor
 final class LoginVM: ObservableObject {
@@ -25,29 +26,45 @@ final class LoginVM: ObservableObject {
     @Published var alertTitle = "Sign In Failed"
     @Published var errorMessage: String?
 
-    private let loginAPI: LoginAPI
     private let onSignIn: (User) -> Void
+    private let networkCheck: () throws -> Void
     private(set) var accessToken: String?
-
-    typealias LoginAPI = (_ deviceId: String, _ deviceType: String, _ devicePushToken: String, _ email: String, _ password: String, _ accept: String) async throws -> AuthLoginResponse
-
-    var isLoggedIn: Bool {
-        isAuthenticated
-    }
 
     var isSocialNotRegistered: Bool {
         statusCode == 404
     }
 
     init() {
-        loginAPI = Self.defaultLoginAPI
-        onSignIn = { PersistenceController.shared.saveUserData(with: $0) }
+        self.onSignIn = { user in
+            PersistenceController.shared.saveUserData(with: user)
+        }
+        self.networkCheck = {
+            try Self.defaultCheckInternetConnection()
+        }
     }
 
-    init(loginAPI: @escaping LoginAPI, onSignIn: @escaping (User) -> Void = { _ in }) {
-        self.loginAPI = loginAPI
+    init(
+        onSignIn: @escaping (User) -> Void = { _ in },
+        networkCheck: @escaping () throws -> Void = {}
+    ) {
         self.onSignIn = onSignIn
+        self.networkCheck = networkCheck
     }
+
+    func checkInternetConnection() throws {
+        try networkCheck()
+    }
+
+    static func defaultCheckInternetConnection() throws {
+        if let reachability = NetworkReachabilityManager(), !reachability.isReachable {
+            throw AppError.message("No internet connection. Please check your network settings.")
+        }
+    }
+
+    func showInfoLogger(message: String) {
+        print(message)
+    }
+
 
     func signInCheck() throws {
         let input = userInputText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -80,30 +97,6 @@ final class LoginVM: ObservableObject {
         }
     }
 
-    func proceedSignIn() async throws {
-        errorMessage = nil
-        statusCode = nil
-        try signInCheck()
-        let response = try await loginAPI(deviceID, "APPLE", "", emailText, password, "application/json")
-        guard let user = response.payload else {
-            throw AuthValidationError(message: "Data not found.")
-        }
-
-        onSignIn(user)
-        accessToken = user.accessToken
-        isAuthenticated = true
-        password = ""
-    }
-
-    func logout() {
-        accessToken = nil
-        isAuthenticated = false
-        userInputText = ""
-        emailText = ""
-        password = ""
-        PersistenceController.shared.deleteUserData()
-    }
-
     private func validationError(title: String, message: String) -> AuthValidationError {
         alertTitle = title
         return AuthValidationError(message: message)
@@ -120,27 +113,6 @@ final class LoginVM: ObservableObject {
         UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     }
 
-    private static func defaultLoginAPI(
-        deviceId: String,
-        deviceType: String,
-        devicePushToken: String,
-        email: String,
-        password: String,
-        accept: String
-    ) async throws -> AuthLoginResponse {
-        try await AsyncAPIWrapper.callAsync {
-            AuthAPI.authPostLogin(
-                deviceId: deviceId,
-                deviceType: deviceType,
-                devicePushToken: devicePushToken,
-                email: email,
-                password: password,
-                accept: accept,
-                completion: $0
-            )
-        }
-    }
-
     private static func statusCode(from error: Error) -> Int? {
         guard case let ErrorResponse.error(statusCode, _, _) = error else { return nil }
         return statusCode
@@ -151,5 +123,53 @@ private struct AuthValidationError: LocalizedError {
     let message: String
 
     var errorDescription: String? { message }
+}
+
+extension LoginVM {
+
+    @MainActor
+    func proceedSignIn() async throws {
+        errorMessage = nil
+        statusCode = nil
+
+        do {
+            try checkInternetConnection()
+            try signInCheck()
+
+            let response = try await AsyncAPIWrapper.callAsync {
+                AuthAPI.authPostLogin(
+                    deviceId: ASP.shared.deviceId,
+                    deviceType: ASP.shared.deviceType,
+                    devicePushToken: AppUserDefaults.getFCMToken(),
+                    email: self.emailText,
+                    password: self.password,
+                    accept: ASP.shared.accept,
+                    completion: $0
+                )
+            }
+
+            guard let payload = response.payload else {
+                throw AppError.message("data not found")
+            }
+
+            onSignIn(payload)
+            accessToken = payload.accessToken
+            isAuthenticated = true
+            password = ""
+
+            self.showInfoLogger(message: "✅ access tocken: \(String(describing: PersistenceController.shared.accessToken))")
+        } catch {
+            throw error
+        }
+    }
+
+    func logout() {
+        accessToken = nil
+        isAuthenticated = false
+        userInputText = ""
+        emailText = ""
+        password = ""
+        PersistenceController.shared.deleteUserData()
+    }
 }
 
